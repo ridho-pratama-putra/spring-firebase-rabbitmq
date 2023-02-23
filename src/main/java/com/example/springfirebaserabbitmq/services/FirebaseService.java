@@ -3,6 +3,7 @@ package com.example.springfirebaserabbitmq.services;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
+import com.google.firebase.messaging.Notification;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,15 @@ public class FirebaseService {
     final FirebaseMessaging firebaseMessaging;
 
     public void send(String message) throws FirebaseMessagingException {
-        Message msg = Message.builder()
-                .setTopic("TOPIC-SAMPLE")
-                .putData("body", message)
+        Notification notification = Notification.builder()
+                .setTitle("Title from sfrk")
+                .setBody("message from sfrk")
                 .build();
-        String sendResult = firebaseMessaging.send(msg);
-        System.out.println(sendResult);
+        Message msg = Message.builder()
+                .setNotification(notification)
+                .setTopic("TOPIC-SAMPLE")
+                .build();
+        String send = FirebaseMessaging.getInstance().send(msg);
+        System.out.println(send);
     }
 }
