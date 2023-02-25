@@ -23,6 +23,6 @@ public class FirebaseService {
                 .setTopic("TOPIC-SAMPLE")
                 .build();
         String send = FirebaseMessaging.getInstance().send(msg);
-        System.out.println(send);
+        System.out.println("FirebaseService send :: " + send);
     }
 }
